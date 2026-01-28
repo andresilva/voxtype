@@ -138,10 +138,8 @@
             # Build with specified features
             buildFeatures = features;
 
-            # Ensure reproducible builds targeting AVX2-capable CPUs (x86-64-v3)
-            # This matches the portable AVX2 binaries we ship for other distros
-            RUSTFLAGS = pkgs.lib.optionalString (system == "x86_64-linux")
-              "-C target-cpu=x86-64-v3";
+            # Target native CPU (for AVX512)
+            RUSTFLAGS = "-C target-cpu=native";
 
             # whisper.cpp cmake needs some help in sandbox
             preBuild = ''
